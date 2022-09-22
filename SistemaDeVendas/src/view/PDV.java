@@ -6,9 +6,12 @@
 package view;
 
 
+import ControlerGeral.Controller;
+import dao.ProdutoDAO;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
+import model.Funcionario;
 import model.ModelTabela;
 import model.Produto;
 
@@ -23,17 +26,20 @@ public class PDV extends javax.swing.JFrame {
     private int id, idCliente;
     //variaveis sendo utilizadas dentro do metodo preenchertabela
     private double valorTotal, valorUnitario, quantidade;
-    private ArrayList lista ;  
+    private ArrayList lista  = new ArrayList(); 
     private double total =0;
     private ModelTabela modelo;
-    
+    private Controller controller = new Controller();
+    ProdutoDAO produtoDAO = new ProdutoDAO();
     /**
      * Creates new form PDV
      */
     public PDV() {
         initComponents();
-        jTextFieldCodigo.requestFocus();
+        /*jTextFieldCodigo.requestFocus();
         lista = new ArrayList();
+        controller = new Controller();
+        produtoDAO = new ProdutoDAO();*/
     }
 
     @SuppressWarnings("unchecked")
@@ -189,15 +195,15 @@ public class PDV extends javax.swing.JFrame {
 
     public void alterarEstoque(){
         for(int i = 0; i < lista.size(); i++){
-            produtoBeans.setId(Integer.parseInt(""+jTableListaDeProdutos.getValueAt(i,0)));
+            /*produtoBeans.setId(Integer.parseInt(""+jTableListaDeProdutos.getValueAt(i,0)));
             produtoBeans.setEstoque(Double.parseDouble(""+jTableListaDeProdutos.getValueAt(i,3)));
-            produtoDAO.alterarEstoque(produtoBeans);
+            produtoDAO.alterarEstoque(produtoBeans);*/
         }
     }
     
     public void confirmacaoPagamento(String formaDePagamento,String AcrescimoDesconto,double valorAcrescimoDesconto){
         ////recebe informacoes para salvar a venda no txt
-        int quantidadeRegistros = vendaDAO.confereQuantidadeDeVendasRegistradas();
+        /*int quantidadeRegistros = vendaDAO.confereQuantidadeDeVendasRegistradas();
         id = ++quantidadeRegistros;
         vendaBeans.setId(id);
         vendaBeans.setIdCliente(idCliente);
@@ -243,7 +249,7 @@ public class PDV extends javax.swing.JFrame {
         id = 0;
         idCliente = 0;
         descricao = "";
-        tipoPessoa = "";
+        tipoPessoa = "";*/
     }
     
     public void receberProduto(Produto produtoBeans){   
@@ -257,30 +263,25 @@ public class PDV extends javax.swing.JFrame {
         getContentPane().repaint();   
     }
     
-    public void receberPessoa(PessoaFisicaBeans pessoaFisicaBean,PessoaJuridicaBeans pessoaJuridicaBeans){
-        if(pessoaJuridicaBeans == null){
-            idCliente = pessoaFisicaBean.getCodigo();
-            jLabelNome.setText(pessoaFisicaBean.getNome());
-            jLabelCpfCnpj.setText(pessoaFisicaBean.getCpf());
+    public void receberPessoa(Funcionario funcionario){
+        if(funcionario == null){
+            idCliente = funcionario.getCodigo();
+            jLabelNome.setText(funcionario.getNome());
+            jLabelCpfCnpj.setText(funcionario.getCpf());
             tipoPessoa =  "F";
-        }else{
-            idCliente = pessoaJuridicaBeans.getCodigo();
-            jLabelNome.setText(pessoaJuridicaBeans.getNome());
-            jLabelCpfCnpj.setText(pessoaJuridicaBeans.getCnpj());
-            tipoPessoa = "J";
         } 
         
     }
     
     private void jTextFieldCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCodigoKeyPressed
         if(evt.getKeyCode() == 113){
-            produtosController.abrirListagemProdutos();
+            controller.abreBuscarProdutos();
         }
     }//GEN-LAST:event_jTextFieldCodigoKeyPressed
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        formaPagamentoController.abrirFormaPagamento();
-        formaPagamentoController.enviarInformacoesDoPdv(jLabelValorTotal.getText());
+        //formaPagamentoController.abrirFormaPagamento();
+        //formaPagamentoController.enviarInformacoesDoPdv(jLabelValorTotal.getText());
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jTextFieldQuantidadeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldQuantidadeKeyPressed
@@ -301,7 +302,7 @@ public class PDV extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldQuantidadeKeyPressed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        pessoaController.openBuscarPessoa();
+        controller.abreBuscarPessoas();
     }//GEN-LAST:event_jLabel2MouseClicked
     
     public void preencherTabela() {
@@ -310,7 +311,7 @@ public class PDV extends javax.swing.JFrame {
                descricao = jLabelNomeProduto.getText();
                valorUnitario = Double.parseDouble(jTextFieldValorUnitario.getText());
                quantidade = Double.parseDouble(jTextFieldQuantidade.getText());
-               if(!produtoNegocio.buscarId(id)){
+               if(!produtoDAO.encontrarProduto(id)){
                    JOptionPane.showMessageDialog(null, "Id de Produto Invalido");
                }else {
                    valorTotal = valorUnitario * quantidade;

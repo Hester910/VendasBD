@@ -12,10 +12,8 @@ import ControlerGeral.Controller;
  */
 public class TelaPricipal extends javax.swing.JFrame {
 
-    private final Controller controler;
     public TelaPricipal() {
         initComponents();
-        controler = new Controller();
     }
 
     /**
@@ -82,22 +80,23 @@ public class TelaPricipal extends javax.swing.JFrame {
 
     private void jButtonVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVendaActionPerformed
         Controller.abrirVenda();
+        //Controller.abrePdv();
     }//GEN-LAST:event_jButtonVendaActionPerformed
 
     private void jButtonFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFornecedorActionPerformed
-        controler.abrirCadFornecedor();
+        Controller.abrirCadFornecedor();
     }//GEN-LAST:event_jButtonFornecedorActionPerformed
 
     private void jButtonUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUsuarioActionPerformed
-        controler.abrirCadUsuario();
+        Controller.abrirCadUsuario();
     }//GEN-LAST:event_jButtonUsuarioActionPerformed
 
     private void jButtonCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCategoriaActionPerformed
-       controler.abrirCadCategoria();
+       Controller.abrirCadCategoria();
     }//GEN-LAST:event_jButtonCategoriaActionPerformed
 
     private void jButtonProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProdutoActionPerformed
-        controler.abrirCadProduto();
+        Controller.abrirCadProduto();
     }//GEN-LAST:event_jButtonProdutoActionPerformed
 
     /**
@@ -128,7 +127,7 @@ public class TelaPricipal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaPricipal().setVisible(true);
             }
