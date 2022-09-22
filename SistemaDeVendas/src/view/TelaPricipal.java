@@ -79,8 +79,8 @@ public class TelaPricipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVendaActionPerformed
-        Controller.abrirVenda();
-        //Controller.abrePdv();
+        //Controller.abrirVenda();
+        Controller.abrePdv();
     }//GEN-LAST:event_jButtonVendaActionPerformed
 
     private void jButtonFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFornecedorActionPerformed

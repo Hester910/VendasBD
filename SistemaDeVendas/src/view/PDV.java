@@ -26,20 +26,20 @@ public class PDV extends javax.swing.JFrame {
     private int id, idCliente;
     //variaveis sendo utilizadas dentro do metodo preenchertabela
     private double valorTotal, valorUnitario, quantidade;
-    private ArrayList lista  = new ArrayList(); 
+    private ArrayList lista ; 
     private double total =0;
     private ModelTabela modelo;
-    private Controller controller = new Controller();
-    ProdutoDAO produtoDAO = new ProdutoDAO();
+    private Controller controller;
+    ProdutoDAO produtoDAO ;
     /**
      * Creates new form PDV
      */
     public PDV() {
         initComponents();
-        /*jTextFieldCodigo.requestFocus();
+        jTextFieldCodigo.requestFocus();
         lista = new ArrayList();
         controller = new Controller();
-        produtoDAO = new ProdutoDAO();*/
+        produtoDAO = new ProdutoDAO();
     }
 
     @SuppressWarnings("unchecked")
