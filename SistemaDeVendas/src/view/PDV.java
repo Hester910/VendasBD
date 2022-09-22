@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import model.ModelTabela;
+import model.Produto;
 
 /**
  *
@@ -245,10 +246,10 @@ public class PDV extends javax.swing.JFrame {
         tipoPessoa = "";
     }
     
-    public void receberProduto(ProdutoBeans produtoBeans){   
-        jTextFieldCodigo.setText(Integer.toString(produtoBeans.getId()));
-        jLabelNomeProduto.setText(produtoBeans.getNome());
-        jTextFieldValorUnitario.setText(Double.toString(produtoBeans.getValorVenda()));
+    public void receberProduto(Produto produtoBeans){   
+        jTextFieldCodigo.setText(Integer.toString(produtoBeans.getCodigo()));
+        jLabelNomeProduto.setText(produtoBeans.getDescricao());
+        jTextFieldValorUnitario.setText(Double.toString(produtoBeans.getValor()));
         jTextFieldQuantidade.setText(Integer.toString(1));
         jTextFieldQuantidade.setEnabled(true);
         jTextFieldValorUnitario.setEnabled(true);

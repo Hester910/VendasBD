@@ -69,32 +69,38 @@ public class ProdutoDAO {
 		}
 	}
 
-	public void mostrarProduto() {
+	public ArrayList<Produto> mostrarProdutos() {
+            ArrayList<Produto> retorno = new ArrayList<>();
 		String sql = "SELECT * FROM tb_produtos";
 	
 		try {
 			con = BancoConnection.getConnection();
-
 			PreparedStatement stm = con.prepareStatement(sql);
-
 			ResultSet rs = stm.executeQuery();
-			System.out.println("\nTODOS OS PRODUTOS\n");
+			//System.out.println("\nTODOS OS PRODUTOS\n");
 
 			while (rs.next()) {
-
-				System.out.println("CODIGO PRODUTO: " + rs.getInt("pro_codigo"));
-				System.out.println("DESCRICAO PRODUTO: " + rs.getString("pro_descricao"));
-				System.out.println("CODIGO FORNECEDOR: " + rs.getInt("tb_fornecedores_for_codigo"));
-				System.out.println("\n");
-				
+                            Produto produto = new Produto();
+                            produto.setCodigo(rs.getInt("pro_codigo"));
+                            produto.setDescricao(rs.getString("pro_descricao"));
+                            produto.setQuantidade(rs.getInt("pro_quantidade"));
+                            produto.setValor(rs.getDouble("pro_valor"));
+;				//System.out.println("CODIGO PRODUTO: " + rs.getInt("pro_codigo"));
+				//System.out.println("DESCRICAO PRODUTO: " + rs.getString("pro_descricao"));
+				//System.out.println("CODIGO FORNECEDOR: " + rs.getInt("tb_fornecedores_for_codigo"));
+				//System.out.println("\n");
+				retorno.add(produto);
 			}
 			rs.close();
-
+                        return retorno;
 		} catch (SQLException ex) {
 			System.out.println("Erro: " + ex);
-		} finally {
+                        return null;
+                } finally {
 			BancoConnection.closeConnection(con);
 		}
 
 	}
+        
+
 }

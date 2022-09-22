@@ -4,10 +4,12 @@
  */
 package ControlerGeral;
 
+import model.Produto;
 import view.CadCategoria;
 import view.CadFornecedor;
 import view.CadProduto;
 import view.CadUsuario;
+import view.PDV;
 import view.Venda;
 
 /**
@@ -20,6 +22,7 @@ public class Controller {
     private static CadProduto cadProduto;
     private static CadCategoria cadCategoria;
     private static Venda venda;
+    private static PDV pdv;
     
     public static void abrirCadFornecedor(){
         if(cadFornecedor == null) cadFornecedor = new CadFornecedor();
@@ -46,4 +49,21 @@ public class Controller {
         
         venda.setVisible(true);
     }
+    public static void abrePdv(){
+        if(pdv == null) pdv = new PDV();
+        
+        pdv.setVisible(true);
+    }
+    
+    public static void RecebeInformacoesProduto(Produto produto){
+        pdv.receberProduto(produto);
+    }    
+    
+    /*public static void receberInformacoesPessoa(PessoaFisicaBeans pessoaFisicaBean,PessoaJuridicaBeans pessoaJuridicaBeans){
+        pdv.receberPessoa(pessoaFisicaBean,pessoaJuridicaBeans);
+    }
+    
+    public void receberConfirmacaoPagamento(String formaDePagamento,String AcrescimoDesconto,double valorAcrescimoDesconto){
+       pdv.confirmacaoPagamento(formaDePagamento, AcrescimoDesconto, valorAcrescimoDesconto);
+    }*/
 }

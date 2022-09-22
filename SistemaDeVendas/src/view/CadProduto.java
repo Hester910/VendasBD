@@ -126,7 +126,7 @@ public class CadProduto extends javax.swing.JFrame {
                 fornecedor = f;
             }
         }
-        produto = new Produto(jTextFieldDescricao.getText(),Double.parseDouble( jTextFieldQuantidadeEmEstoque.getText()), Integer.parseInt(jTextFieldValor.getText()),fornecedor, categoria);
+        produto = new Produto(jTextFieldDescricao.getText(),Double.parseDouble( jTextFieldValor.getText()), Integer.parseInt(jTextFieldQuantidadeEmEstoque.getText()),fornecedor, categoria);
         produtoDAO.inserirProduto(produto);
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
