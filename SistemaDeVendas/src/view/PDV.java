@@ -8,12 +8,19 @@ package view;
 
 import ControlerGeral.Controller;
 import dao.ProdutoDAO;
+import dao.VendaDAO;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import model.Funcionario;
 import model.ModelTabela;
 import model.Produto;
+import model.Venda;
 
 /**
  *
@@ -31,6 +38,8 @@ public class PDV extends javax.swing.JFrame {
     private ModelTabela modelo;
     private Controller controller;
     ProdutoDAO produtoDAO ;
+    VendaDAO vendaDAO;
+    Venda venda = new Venda();
     /**
      * Creates new form PDV
      */
@@ -40,6 +49,9 @@ public class PDV extends javax.swing.JFrame {
         lista = new ArrayList();
         controller = new Controller();
         produtoDAO = new ProdutoDAO();
+        vendaDAO = new VendaDAO();
+        
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -192,44 +204,37 @@ public class PDV extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(768, 645));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    public void alterarEstoque(){
-        for(int i = 0; i < lista.size(); i++){
-            /*produtoBeans.setId(Integer.parseInt(""+jTableListaDeProdutos.getValueAt(i,0)));
-            produtoBeans.setEstoque(Double.parseDouble(""+jTableListaDeProdutos.getValueAt(i,3)));
-            produtoDAO.alterarEstoque(produtoBeans);*/
-        }
-    }
-    
     public void confirmacaoPagamento(String formaDePagamento,String AcrescimoDesconto,double valorAcrescimoDesconto){
         ////recebe informacoes para salvar a venda no txt
-        /*int quantidadeRegistros = vendaDAO.confereQuantidadeDeVendasRegistradas();
-        id = ++quantidadeRegistros;
-        vendaBeans.setId(id);
-        vendaBeans.setIdCliente(idCliente);
-        vendaBeans.setTipoPessoa(tipoPessoa);
-        vendaBeans.setValor(total);
+        //int quantidadeRegistros = vendaDAO.quantidadeVenda();
+        //id = ++quantidadeRegistros;
+        //vendaBeans.setId(id);
+        SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date data = new Date();
+        String dataAtual = formatador.format( data );
+        DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        LocalDateTime localDateTime = LocalDateTime.from(formatDateTime.parse(dataAtual));
+        Timestamp timestamp = Timestamp.valueOf(localDateTime);
+        venda.setHorario(timestamp);
+        venda.setClienteCpf(jLabelCpfCnpj.getText());
+        venda.setValorTotal(total);
         if(valorAcrescimoDesconto != 0.00){//confere se houve desconto na finalizacao da venda
             if(AcrescimoDesconto.equals("Desconto")){//confere se houve desconto ou acrescimo
-                vendaBeans.setValorDescontro(valorAcrescimoDesconto);
-                vendaBeans.setValorAcrescimo(0);
-            }else{
-                vendaBeans.setValorAcrescimo(valorAcrescimoDesconto);
-                vendaBeans.setValorDescontro(0);
+                venda.setDesconto(valorAcrescimoDesconto);
             }    
         }else{
-            vendaBeans.setValorAcrescimo(0);
-            vendaBeans.setValorDescontro(0);
+            venda.setDesconto(0);
         }      
-        vendaBeans.setFormaPagamento(formaDePagamento);
-        vendaDAO.cadastrar(vendaBeans);
+        venda.setFormaPagamento(formaDePagamento);
+        venda.setFuncionario(idCliente);
+        vendaDAO.inserirVenda(venda);
         //cadastra no txt o id do produto e da venda
-        for(int i = 0; i < lista.size(); i++){
+        /*for(int i = 0; i < lista.size(); i++){
             produtosVendaBeans.setIdVenda(id);
             produtosVendaBeans.setIdProduto(Integer.parseInt(""+jTableListaDeProdutos.getValueAt(i,0)));
             produtoVendDAO.cadastrar(produtosVendaBeans);
-        }
-        alterarEstoque();   
+        }*/
+        //alterarEstoque();   
         jLabelFrenteDaTabela.setVisible(true);
         jTextFieldCodigo.setText("");
         jTextFieldQuantidade.setText("");
@@ -249,7 +254,7 @@ public class PDV extends javax.swing.JFrame {
         id = 0;
         idCliente = 0;
         descricao = "";
-        tipoPessoa = "";*/
+        tipoPessoa = "";
     }
     
     public void receberProduto(Produto produtoBeans){   
@@ -264,12 +269,12 @@ public class PDV extends javax.swing.JFrame {
     }
     
     public void receberPessoa(Funcionario funcionario){
-        if(funcionario == null){
+        //if(funcionario == null){
             idCliente = funcionario.getCodigo();
             jLabelNome.setText(funcionario.getNome());
             jLabelCpfCnpj.setText(funcionario.getCpf());
             tipoPessoa =  "F";
-        } 
+        //} 
         
     }
     
@@ -280,8 +285,8 @@ public class PDV extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldCodigoKeyPressed
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        //formaPagamentoController.abrirFormaPagamento();
-        //formaPagamentoController.enviarInformacoesDoPdv(jLabelValorTotal.getText());
+        controller.abreFormaPagamento();
+        controller.enviarInformacoesDoPdv(jLabelValorTotal.getText());
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jTextFieldQuantidadeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldQuantidadeKeyPressed

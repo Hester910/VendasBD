@@ -99,7 +99,7 @@ public class BuscarPessoas extends javax.swing.JFrame {
             dados.clear();
             ListFuncionario.clear(); //limpa o arrray list
             ListFuncionario = funcionarioDAO.mostrarFuncionarios();        
-            ListFuncionario.clear();
+            //ListFuncionario.clear();
             for(int i = 0; i < ListFuncionario.size(); i++){
                 dados.add(new Object[]{ListFuncionario.get(i).getCodigo(),ListFuncionario.get(i).getNome(), ListFuncionario.get(i).getCpf()});  
             }

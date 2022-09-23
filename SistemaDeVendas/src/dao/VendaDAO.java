@@ -1,10 +1,11 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
+
 
 import model.Funcionario;
 import model.Item;
@@ -20,20 +21,19 @@ public class VendaDAO {
 	}
 
 	public void inserirVenda(Venda v) {
-		String sql = "INSERT INTO tb_vendas ( ven_horario, ven_valor_total, ven_cli_cpf, ven_desconto, tb_funcionarios_fun_codigo, tb_itens_ite_codigo) VALUES ( ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO tb_vendas ( ven_horario, ven_valor_total, ven_cli_cpf, ven_desconto, tb_funcionarios_fun_codigo, formapagamento) VALUES ( ?, ?, ?, ?, ?,?)";
 		try {
 			con = BancoConnection.getConnection();
 
 			PreparedStatement stm = con.prepareStatement(sql);
 
 			//stm.setInt(1, v.getCodigo());
-			stm.setString(1, v.getHorario());
+			stm.setTimestamp(1, v.getHorario());
 			stm.setDouble(2, v.getValorTotal());
 			stm.setString(3, v.getClienteCpf());
 			stm.setDouble(4, v.getDesconto());
-			stm.setInt(5, v.getFuncionario().getCodigo());
-			stm.setInt(6, v.getItem().getCodigo());
-			
+			stm.setInt(5, v.getFuncionario());
+			stm.setString(6, v.getFormaPagamento());
 			stm.execute();
 			System.out.println("Venda cadastrada com sucesso");
 		} catch (SQLException e) {
@@ -55,11 +55,11 @@ public class VendaDAO {
 
 			while (rs.next()) {
 				v.setCodigo(rs.getInt("ven_codigo"));
-				v.setHorario(rs.getString("ven_horario"));
+				v.setHorario(rs.getTimestamp("ven_horario"));
 				v.setValorTotal(rs.getDouble("ven_valor_total"));
 				v.setClienteCpf(rs.getString("ven_cli_cpf"));
-				v.setFuncionario((Funcionario)rs.getObject("tb_funcionarios_for_codigo"));
-				v.setItem((Item)rs.getObject("tb_itens_ite_codigo"));
+				v.setFuncionario(rs.getInt("tb_funcionarios_for_codigo"));
+				//v.setItem((Item)rs.getObject("tb_itens_ite_codigo"));
 
 			}
 			return v;
@@ -87,7 +87,6 @@ public class VendaDAO {
 				System.out.println("CPF CLIENTE : " + rs.getString("ven_cli_cpf"));
 				System.out.println("DESCONTO: " + rs.getDouble("ven_desconto"));
 				System.out.println("FUNCIONARIO: " + rs.getInt("tb_funcionarios_fun_codigo"));
-				System.out.println("ITEM : " + rs.getInt("tb_itens_ite_codigo"));
 				System.out.println("\n");
 
 			}
@@ -101,6 +100,26 @@ public class VendaDAO {
 
 	}
 
+    public int quantidadeVenda(){
+        String sql = "SELECT count(ven_codigo) FROM tb_vendas";
 
+		try {
+			con = BancoConnection.getConnection();
+			PreparedStatement stm = con.prepareStatement(sql);
+			ResultSet rs = stm.executeQuery();
+			//System.out.println("\nTodas VENDAS\n");
+
+			while (rs.next()) {
+				return rs.getInt("quantidade");
+			}
+			rs.close();
+		} catch (SQLException ex) {
+			System.out.println("Erro: " + ex);
+		} finally {
+			BancoConnection.closeConnection(con);
+		}
+                
+                        return 0;
+    }
 
 }

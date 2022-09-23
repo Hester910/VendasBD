@@ -12,6 +12,7 @@ import view.CadCategoria;
 import view.CadFornecedor;
 import view.CadProduto;
 import view.CadUsuario;
+import view.FormaPagamento;
 import view.PDV;
 import view.Venda;
 
@@ -28,6 +29,7 @@ public class Controller {
     private static PDV pdv;
     private static BuscarProdutos buscarProduto;
     private static BuscarPessoas buscarPessoas;
+    private static FormaPagamento formaPagamento;
     
     public static void abrirCadFornecedor(){
         if(cadFornecedor == null) cadFornecedor = new CadFornecedor();
@@ -70,6 +72,16 @@ public class Controller {
         buscarProduto.setVisible(true);
     }
     
+    public static void abreFormaPagamento(){
+        if(formaPagamento == null) formaPagamento = new FormaPagamento();
+        
+        formaPagamento.setVisible(true);
+    }
+    
+    public static void enviarInformacoesDoPdv(String valorTotal){
+        formaPagamento.receberInformacoesPDV(valorTotal);
+    }
+    
     public static void RecebeInformacoesProduto(Produto produto){
         pdv.receberProduto(produto);
     }    
@@ -78,7 +90,7 @@ public class Controller {
         pdv.receberPessoa(funcionario);
     }
     
-    /*public void receberConfirmacaoPagamento(String formaDePagamento,String AcrescimoDesconto,double valorAcrescimoDesconto){
-       pdv.confirmacaoPagamento(formaDePagamento, AcrescimoDesconto, valorAcrescimoDesconto);
-    }*/
+    public void receberConfirmacaoPagamento(String formaDePagamento,String AcrescimoDesconto,double valorAcrescimoDesconto){
+       pdv.confirmacaoPagamento( formaDePagamento, AcrescimoDesconto, valorAcrescimoDesconto);
+    }
 }

@@ -42,42 +42,36 @@ CREATE TABLE IF NOT EXISTS "tb_produtos" (
    	ON UPDATE NO ACTION);
 
 
-
-
-
-CREATE TABLE IF NOT EXISTS "tb_itens" (
-  "ite_codigo" serial NOT NULL,
-  "ite_quantidade" INT NOT NULL,
-  "ite_valor_parcial" DECIMAL(7,2) NOT NULL,
-  "tb_produtos_pro_codigo" BIGINT NOT NULL,
-  PRIMARY KEY ("ite_codigo"),
-  CONSTRAINT "fk_tb_itens_tb_produtos1"
-    FOREIGN KEY ("tb_produtos_pro_codigo")
-    REFERENCES "tb_produtos" ("pro_codigo")
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
-
-
-
-
 CREATE TABLE IF NOT EXISTS "tb_vendas" (
   "ven_codigo" serial NOT NULL,
   "ven_horario" TIMESTAMP NOT NULL,
   "ven_valor_total" DECIMAL(7,2) NOT NULL,
   "ven_cli_cpf" VARCHAR(11) UNIQUE,
   "ven_desconto" NUMERIC(10,2),
-  "tb_itens_ite_codigo" BIGINT NOT NULL,
   "tb_funcionarios_fun_codigo" BIGINT NOT NULL,
   PRIMARY KEY ("ven_codigo"),
   CONSTRAINT "fk_tb_vendas_tb_funcionarios1"
     FOREIGN KEY ("tb_funcionarios_fun_codigo")
     REFERENCES "tb_funcionarios" ("fun_codigo")
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-CONSTRAINT "fk_tb_vendas_tb_itens1"
-    FOREIGN KEY ("tb_itens_ite_codigo")
-    REFERENCES "tb_itens" ("ite_codigo")
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    ON UPDATE NO ACTION
+);
+
+alter table tb_vendas add column formaPagamento character varying(50);
+
+
+CREATE TABLE tb_itens
+(
+  ite_codigo serial NOT NULL,
+  ite_quantidade integer NOT NULL,
+  ite_valor_parcial numeric(7,2) NOT NULL,
+  tb_produtos_pro_codigo bigint NOT NULL,
+  tb_vendas_ven_codigo bigint NOT NULL,
+  CONSTRAINT fk_tb_itens_tb_produtos1 FOREIGN KEY (tb_produtos_pro_codigo) REFERENCES tb_produtos (pro_codigo), 
+  CONSTRAINT fk_tb_vendas_tb_produtos1 FOREIGN KEY (tb_vendas_ven_codigo) REFERENCES tb_vendas (ven_codigo) 
+)
+
+
+
+
 
