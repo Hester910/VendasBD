@@ -3,16 +3,20 @@ package model;
 public class Item {
 
 	private int codigo;
-	private int quantidade;
+	private double quantidade;
 	private double valorParcial;
 	private Produto produto;
+        private int codigoVenda;
 
-	public Item(int codigo, int quantidade, double valorParcial, Produto produto) {
-		this.codigo = codigo;
-		this.quantidade = quantidade;
-		this.valorParcial = valorParcial;
-		this.produto = produto;
-	}
+    public Item(int codigo, double quantidade, double valorParcial, Produto produto, int codigoVenda) {
+        this.codigo = codigo;
+        this.quantidade = quantidade;
+        this.valorParcial = valorParcial;
+        this.produto = produto;
+        this.codigoVenda = codigoVenda;
+    }
+
+	
 
 	public Item() {
 	}
@@ -25,11 +29,11 @@ public class Item {
 		this.codigo = codigo;
 	}
 
-	public int getQuantidade() {
+	public double getQuantidade() {
 		return quantidade;
 	}
 
-	public void setQuantidade(int quantidade) {
+	public void setQuantidade(double quantidade) {
 		this.quantidade = quantidade;
 	}
 
@@ -48,6 +52,14 @@ public class Item {
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
+
+    public void setCodigoVenda(int codigoVenda) {
+        this.codigoVenda = codigoVenda;
+    }
+
+    public int getCodigoVenda() {
+        return codigoVenda;
+    }
 
 	@Override
 	public String toString() {

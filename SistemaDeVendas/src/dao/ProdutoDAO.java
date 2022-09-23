@@ -13,6 +13,8 @@ import model.Produto;
 
 public class ProdutoDAO {
 	private Connection con = null;
+        FornecedorDAO fornecedorDao = new FornecedorDAO();
+        CategoriaDAO categoriaDAO = new CategoriaDAO();
 
 	public ProdutoDAO() {
 		con = BancoConnection.getConnection();
@@ -56,9 +58,10 @@ public class ProdutoDAO {
 				p.setDescricao(rs.getString("pro_descricao"));
 				p.setValor(rs.getDouble("pro_valor"));
 				p.setQuantidade(rs.getInt("pro_quantidade"));
-				p.setFornecedor((Fornecedor) rs.getObject("tb_fornecedores_for_codigo"));
-				p.setCategoria((Categoria) rs.getObject("tb_categoria_cat_codigo"));
-
+                                p.setFornecedor(fornecedorDao.achar_fornecedor(rs.getInt("tb_fornecedores_for_codigo")));
+				//p.setFornecedor((Fornecedor) rs.getObject("tb_fornecedores_for_codigo"));
+				//p.setCategoria((Categoria) rs.getObject("tb_categoria_cat_codigo"));
+                                p.setCategoria(categoriaDAO.achar_categoria(rs.getInt("tb_categoria_cat_codigo")));
 			}
 			return p;
 		} catch (SQLException ex) {

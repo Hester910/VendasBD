@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS "tb_vendas" (
   "ven_codigo" serial NOT NULL,
   "ven_horario" TIMESTAMP NOT NULL,
   "ven_valor_total" DECIMAL(7,2) NOT NULL,
-  "ven_cli_cpf" VARCHAR(11) UNIQUE,
+  "ven_cli_cpf" VARCHAR(11),
   "ven_desconto" NUMERIC(10,2),
   "tb_funcionarios_fun_codigo" BIGINT NOT NULL,
   PRIMARY KEY ("ven_codigo"),

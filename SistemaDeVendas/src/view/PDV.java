@@ -7,6 +7,7 @@ package view;
 
 
 import ControlerGeral.Controller;
+import dao.ItemDAO;
 import dao.ProdutoDAO;
 import dao.VendaDAO;
 import java.sql.Timestamp;
@@ -18,6 +19,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import model.Funcionario;
+import model.Item;
 import model.ModelTabela;
 import model.Produto;
 import model.Venda;
@@ -40,6 +42,8 @@ public class PDV extends javax.swing.JFrame {
     ProdutoDAO produtoDAO ;
     VendaDAO vendaDAO;
     Venda venda = new Venda();
+    Item item;
+    ItemDAO itemDAO;
     /**
      * Creates new form PDV
      */
@@ -50,8 +54,8 @@ public class PDV extends javax.swing.JFrame {
         controller = new Controller();
         produtoDAO = new ProdutoDAO();
         vendaDAO = new VendaDAO();
-        
-        
+        item = new Item();
+        itemDAO = new ItemDAO();
     }
 
     @SuppressWarnings("unchecked")
@@ -229,11 +233,15 @@ public class PDV extends javax.swing.JFrame {
         venda.setFuncionario(idCliente);
         vendaDAO.inserirVenda(venda);
         //cadastra no txt o id do produto e da venda
-        /*for(int i = 0; i < lista.size(); i++){
-            produtosVendaBeans.setIdVenda(id);
-            produtosVendaBeans.setIdProduto(Integer.parseInt(""+jTableListaDeProdutos.getValueAt(i,0)));
-            produtoVendDAO.cadastrar(produtosVendaBeans);
-        }*/
+        for(int i = 0; i < lista.size(); i++){
+            item.setCodigoVenda(vendaDAO.quantidadeVenda());
+            int a = item.getCodigoVenda();
+            //JOptionPane.showMessageDialog(null, ""+item.getCodigoVenda());
+            item.setProduto(produtoDAO.achar_produto(Integer.parseInt(""+jTableListaDeProdutos.getValueAt(i,0))));
+            item.setQuantidade(Double.parseDouble(""+jTableListaDeProdutos.getValueAt(i,3)));
+            item.setValorParcial(Double.parseDouble(""+jTableListaDeProdutos.getValueAt(i,4)));
+            itemDAO.inserirItem(item);
+        }
         //alterarEstoque();   
         jLabelFrenteDaTabela.setVisible(true);
         jTextFieldCodigo.setText("");

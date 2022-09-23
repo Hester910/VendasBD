@@ -101,7 +101,7 @@ public class VendaDAO {
 	}
 
     public int quantidadeVenda(){
-        String sql = "SELECT count(ven_codigo) FROM tb_vendas";
+        String sql = "SELECT max(ven_codigo) as venda FROM tb_vendas";
 
 		try {
 			con = BancoConnection.getConnection();
@@ -110,7 +110,7 @@ public class VendaDAO {
 			//System.out.println("\nTodas VENDAS\n");
 
 			while (rs.next()) {
-				return rs.getInt("quantidade");
+				return rs.getInt("venda");
 			}
 			rs.close();
 		} catch (SQLException ex) {

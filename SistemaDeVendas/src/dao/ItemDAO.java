@@ -18,16 +18,16 @@ public class ItemDAO {
 	}
 
 	public void inserirItem(Item i) {
-		String sql = "INSERT INTO tb_itens (ite_codigo, ite_quantidade, ite_valor_parcial, tb_produtos_pro_codigo) VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO tb_itens(ite_quantidade, ite_valor_parcial, tb_produtos_pro_codigo, tb_vendas_ven_codigo)VALUES ( ?, ?, ?, ?);";
 		try {
 			con = BancoConnection.getConnection();
 
 			PreparedStatement stm = con.prepareStatement(sql);
 
-			stm.setInt(1, i.getCodigo());
-			stm.setInt(2, i.getQuantidade());
-			stm.setDouble(3, i.getValorParcial());
-			stm.setInt(4, i.getProduto().getCodigo());
+			stm.setDouble(1, i.getQuantidade());
+			stm.setDouble(2, i.getValorParcial());
+			stm.setInt(3, i.getProduto().getCodigo());
+			stm.setInt(4, i.getCodigoVenda());
 
 			stm.execute();
 			System.out.println("Item cadastrado com sucesso");
@@ -50,7 +50,7 @@ public class ItemDAO {
 
 			while (rs.next()) {
 				i.setCodigo(rs.getInt("ite_codigo"));
-				i.setQuantidade(rs.getInt("ite_quantidade"));
+				i.setQuantidade(rs.getDouble("ite_quantidade"));
 				i.setValorParcial(rs.getDouble("ite_valor_parcial"));
 
 			}
