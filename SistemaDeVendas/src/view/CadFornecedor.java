@@ -5,6 +5,7 @@
 package view;
 import ControlerGeral.Controller;
 import dao.FornecedorDAO;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import model.Fornecedor;
 /**
@@ -14,12 +15,19 @@ import model.Fornecedor;
 public class CadFornecedor extends javax.swing.JFrame {
 
     private Controller controller;
+    boolean editando;
+    FornecedorDAO fornecedorDAO;
+    ArrayList<Fornecedor> listFornecedor = new ArrayList<>();
     /**
      * Creates new form CadFornecedor
      */
     public CadFornecedor() {
         initComponents();
         controller = new Controller();
+        editando = false;
+        fornecedorDAO = new FornecedorDAO();
+        PreencherComboBox();
+        jComboBoxFornecedor.setEnabled(false);
     }
 
     /**
@@ -32,14 +40,30 @@ public class CadFornecedor extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        jComboBoxFornecedor = new javax.swing.JComboBox<>();
+        jButtonEditar = new javax.swing.JButton();
         jTextFieldRazaosocial = new javax.swing.JTextField();
         jButtonSalvar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+
+        jLabel1.setText("Fornecedores");
+        jLabel1.setEnabled(false);
+        jLabel1.setFocusable(false);
+
+        jComboBoxFornecedor.setEnabled(false);
+        jComboBoxFornecedor.setFocusable(false);
+
+        jButtonEditar.setText("Editar");
+        jButtonEditar.setEnabled(false);
+        jButtonEditar.setFocusable(false);
+        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setText("razão social");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, -1));
         getContentPane().add(jTextFieldRazaosocial, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 170, -1));
 
         jButtonSalvar.setText("Salvar");
@@ -50,10 +74,20 @@ public class CadFornecedor extends javax.swing.JFrame {
         });
         getContentPane().add(jButtonSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 30, -1, -1));
 
-        setSize(new java.awt.Dimension(416, 308));
+        jLabel2.setText("razão social");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, -1));
+
+        setSize(new java.awt.Dimension(386, 171));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    public void PreencherComboBox(){        
+        listFornecedor = fornecedorDAO.mostrarFornecedor();
+        for(Fornecedor f : listFornecedor){
+            jComboBoxFornecedor.addItem(f.getDescricao());
+        }
+    }
+    
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         String nome = jTextFieldRazaosocial.getText();
         if(nome.isEmpty()) {
@@ -64,6 +98,11 @@ public class CadFornecedor extends javax.swing.JFrame {
                 fornecedorDAO.inserirFornecedor(fornecedor);
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
+
+    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
+        jComboBoxFornecedor.setEnabled(true);
+        
+    }//GEN-LAST:event_jButtonEditarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -102,8 +141,11 @@ public class CadFornecedor extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonSalvar;
+    private javax.swing.JComboBox<String> jComboBoxFornecedor;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField jTextFieldRazaosocial;
     // End of variables declaration//GEN-END:variables
 }

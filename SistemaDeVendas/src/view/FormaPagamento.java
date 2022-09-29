@@ -116,7 +116,7 @@ public class FormaPagamento extends javax.swing.JFrame {
         jPanel3.setBounds(390, 220, 190, 50);
 
         jComboBoxFormaPagamento.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBoxFormaPagamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dinheiro", "Cartão Debito", "Cartão Credito", " " }));
+        jComboBoxFormaPagamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dinheiro", "Cartão Debito", "Cartão Credito", "PIX" }));
         getContentPane().add(jComboBoxFormaPagamento);
         jComboBoxFormaPagamento.setBounds(30, 130, 160, 40);
 

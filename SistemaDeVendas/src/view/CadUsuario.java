@@ -71,7 +71,7 @@ public class CadUsuario extends javax.swing.JFrame {
         jButtonEditar.setText("Editar");
         getContentPane().add(jButtonEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 80, -1, -1));
 
-        setSize(new java.awt.Dimension(416, 308));
+        setSize(new java.awt.Dimension(350, 196));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

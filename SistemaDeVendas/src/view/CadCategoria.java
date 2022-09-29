@@ -49,7 +49,7 @@ public class CadCategoria extends javax.swing.JFrame {
         });
         getContentPane().add(jButtonSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
 
-        setSize(new java.awt.Dimension(416, 308));
+        setSize(new java.awt.Dimension(344, 128));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

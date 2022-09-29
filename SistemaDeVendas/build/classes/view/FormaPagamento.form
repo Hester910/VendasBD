@@ -222,7 +222,7 @@
             <StringItem index="0" value="Dinheiro"/>
             <StringItem index="1" value="Cart&#xe3;o Debito"/>
             <StringItem index="2" value="Cart&#xe3;o Credito"/>
-            <StringItem index="3" value=" "/>
+            <StringItem index="3" value="PIX"/>
           </StringArray>
         </Property>
       </Properties>
