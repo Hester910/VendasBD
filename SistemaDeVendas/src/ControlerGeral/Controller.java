@@ -8,6 +8,7 @@ import model.Funcionario;
 import model.Produto;
 import view.BuscarPessoas;
 import view.BuscarProdutos;
+import view.BuscarProdutosParaEditar;
 import view.CadCategoria;
 import view.CadFornecedor;
 import view.CadProduto;
@@ -28,6 +29,7 @@ public class Controller {
     private static Venda venda;
     private static PDV pdv;
     private static BuscarProdutos buscarProduto;
+    private static BuscarProdutosParaEditar buscarProdutoParaEditar;
     private static BuscarPessoas buscarPessoas;
     private static FormaPagamento formaPagamento;
     
@@ -72,6 +74,12 @@ public class Controller {
         buscarProduto.setVisible(true);
     }
     
+    public static void abreBuscarProdutosParaEditar(){
+        if(buscarProdutoParaEditar == null) buscarProdutoParaEditar = new BuscarProdutosParaEditar();
+        
+        buscarProdutoParaEditar.setVisible(true);
+    }
+    
     public static void abreFormaPagamento(){
         if(formaPagamento == null) formaPagamento = new FormaPagamento();
         
@@ -85,6 +93,10 @@ public class Controller {
     public static void RecebeInformacoesProduto(Produto produto){
         pdv.receberProduto(produto);
     }    
+    
+    public static void RecebeInformacoesProduto2(Produto produto){
+        cadProduto.receberProduto(produto);
+    }
     
     public static void receberInformacoesPessoa(Funcionario funcionario){
         pdv.receberPessoa(funcionario);

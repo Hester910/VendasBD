@@ -1,0 +1,154 @@
+INSERT INTO tb_categoria VALUES (01, 'Bebidas');
+INSERT INTO tb_categoria VALUES (02, 'Limpeza');
+INSERT INTO tb_categoria VALUES (03, 'Carnes');
+INSERT INTO tb_categoria VALUES (04, 'Hortifruti');
+INSERT INTO tb_categoria VALUES (05, 'Mercearia');
+INSERT INTO tb_categoria VALUES (06, 'Higiene pessoal');
+
+INSERT INTO tb_fornecedores VALUES (0001, 'Frigoríficos');
+INSERT INTO tb_fornecedores VALUES (0002, 'CEASA');
+INSERT INTO tb_fornecedores VALUES (0003, 'Distribuidora de bebidas');
+INSERT INTO tb_fornecedores VALUES (0004, 'Higiene');
+INSERT INTO tb_fornecedores VALUES (0005, 'Limpeza');
+INSERT INTO tb_fornecedores VALUES (0006, 'Mercearia');
+
+INSERT INTO tb_funcionarios VALUES (11, 'Marcos Oliveira', '11111111111', 'oli13579');
+INSERT INTO tb_funcionarios VALUES (22, 'Ana Pereira', '22222222222', 'bird450ana');
+INSERT INTO tb_funcionarios VALUES (33, 'Paulo Vieira', '33333333333', 'plvr159aeiou');
+INSERT INTO tb_funcionarios VALUES (44, 'Carlos Amorim', '44444444444', 'g&r1992ca');
+INSERT INTO tb_funcionarios VALUES (55, 'Sara Alves', '55555555555', '754saralves');
+INSERT INTO tb_funcionarios VALUES (66, 'Mateus Mattos', '66666666666', 'matt08teus');
+INSERT INTO tb_funcionarios VALUES (77, 'Vanessa Siqueira', '77777777777', 'n3554siqueira');
+
+INSERT INTO tb_produtos VALUES (1, 'Kg de Arroz Namorado', '6,10', 1, '0006', '05');
+INSERT INTO tb_produtos VALUES (2, 'Kg de Feijão Carioca', '8,98', 1, '0006', '05');
+INSERT INTO tb_produtos VALUES (3, 'Kg de Frango', '14,29', 1, '0001', '03');
+INSERT INTO tb_produtos VALUES (4, 'Creme dental Colgate', '2,19', 1, '0004', '06');
+INSERT INTO tb_produtos VALUES (5, 'Kg de Presunto Sadia', '12,00', 1, '0001', '03');
+INSERT INTO tb_produtos VALUES (6, 'Algodão', '3,49', 1, '0004', '06');
+INSERT INTO tb_produtos VALUES (7, 'Kg de Tomate', '3,69', 1, '0002', '04');
+INSERT INTO tb_produtos VALUES (8, 'Kg de Pimentão', '4,50', 1, '0002', '04');
+INSERT INTO tb_produtos VALUES (9, 'Kg de Maçã', '7,22', 1, '0002', '04');
+INSERT INTO tb_produtos VALUES (10, 'Energético Red Bull', '7,35', 1, '0003', '01');
+INSERT INTO tb_produtos VALUES (11, 'Vinho Quinta do Morgado', '16,89', 1, '0003', '01');
+INSERT INTO tb_produtos VALUES (12, 'Refrigerante Coca Cola 2L', '9,49', 1, '0003', '01');
+INSERT INTO tb_produtos VALUES (13, 'Kg de Sal', '2,49', 1, '0006', '05');
+INSERT INTO tb_produtos VALUES (14, 'Sabonete Protex', '3,79', 1, '0004', '06');
+INSERT INTO tb_produtos VALUES (15, 'Shampoo Seda', '21,99', 1, '0004', '06');
+INSERT INTO tb_produtos VALUES (16, 'Kg de Macarrão Espaguete Vitarella', '2,55', 1, '0006', '05');
+INSERT INTO tb_produtos VALUES (17, 'Kg de Chã de dentro', '22,79', 1, '0001', '03');
+INSERT INTO tb_produtos VALUES (18, 'Kg de Salsicha Perdigão', '15,98', 1, '0001', '03');
+INSERT INTO tb_produtos VALUES (19, 'Água sanitária Dragão', '3,58', 1, '0005', '02');
+INSERT INTO tb_produtos VALUES (20, 'Sabão em pó Omo', '19,99', 1, '0005', '02');
+
+INSERT INTO tb_vendas VALUES (001, '22/10/2021', '248,80', '11122233300', '20', '11');
+INSERT INTO tb_vendas VALUES (002, '02/06/2022', '136,64', '11122233311', '10', '33');
+INSERT INTO tb_vendas VALUES (003, '30/03/2022', '35,92', '00011122200', '20', '44');
+INSERT INTO tb_vendas VALUES (004, '19/12/2022', '24,43', '00011122211', '5', '33');
+INSERT INTO tb_vendas VALUES (005, '08/03/2021', '27,00', '00011122244', '25', '77');
+INSERT INTO tb_vendas VALUES (006, '27/08/2022', '204,80', '22233344400', '10', '22');
+INSERT INTO tb_vendas VALUES (007, '15/11/2022', '136,74', '22244433311', '12', '22');
+INSERT INTO tb_vendas VALUES (008, '20/09/2021', '103,13', '44455566600', '10', '66');
+INSERT INTO tb_vendas VALUES (009, '01/02/2022', '230,09', '44400055566', '12', '55');
+INSERT INTO tb_vendas VALUES (010, '29/07/2022', '177,31', '33344455500', '10', '77');
+
+INSERT INTO tb_itens VALUES (011, 3, '18,30', '1', '001');
+INSERT INTO tb_itens VALUES (012, 4, '35,92', '2', '003');
+INSERT INTO tb_itens VALUES (013, 5, '71,45', '3', '002');
+INSERT INTO tb_itens VALUES (014, 10, '21,90', '4', '002');
+INSERT INTO tb_itens VALUES (015, 5, '60,00', '5', '010');
+INSERT INTO tb_itens VALUES (016, 7, '24,43', '6', '004');
+INSERT INTO tb_itens VALUES (017, 3, '11,07', '7', '002');
+INSERT INTO tb_itens VALUES (018, 6, '27,00', '8', '005');
+INSERT INTO tb_itens VALUES (019, 4, '28,88', '9', '006');
+INSERT INTO tb_itens VALUES (020, 13, '95,55', '10', '008');
+INSERT INTO tb_itens VALUES (021, 7, '118,23', '11', '009');
+INSERT INTO tb_itens VALUES (022, 10, '94,90', '12', '010');
+INSERT INTO tb_itens VALUES (023, 9, '22,41', '13', '010');
+INSERT INTO tb_itens VALUES (024, 2, '7,58', '14', '008');
+INSERT INTO tb_itens VALUES (025, 8, '175,92', '15', '006');
+INSERT INTO tb_itens VALUES (026, 12, '30,60', '16', '001');
+INSERT INTO tb_itens VALUES (027, 6, '136,74', '17', '007');
+INSERT INTO tb_itens VALUES (028, 7, '111,86', '18', '009');
+INSERT INTO tb_itens VALUES (029, 9, '32,22', '19', '002');
+INSERT INTO tb_itens VALUES (030, 10, '199,90', '20', '001');
+
+-- Categorias de todos os produtos registrados
+SELECT c.cat_nome
+FROM tb_categoria c, tb_produtos p
+WHERE p.tb_categoria_cat_codigo = c.cat_codigo
+
+-- Quantos produtos são fornecidos pelo fornecedor X
+SELECT pro_codigo COUNT(*)
+FROM tb_produtos
+WHERE tb_fornecedores_for_codigo = '0004'
+
+-- Todos os atributos de todos os produtos da venda de código X 
+SELECT p.*
+FROM tb_produtos p, tb_vendas v, tb_itens i
+WHERE p.pro_codigo = i.tb_produtos_pro_codigo
+  AND i.tb_vendas_ven_codigo = v.ven_codigo
+  AND v.ven_codigo = '001';
+  
+-- Listar as descrições de todos os produtos 
+-- que estão na venda de código X
+SELECT p.pro_descricao
+FROM tb_produtos p
+WHERE EXISTS (
+  SELECT p.pro_codigo
+  FROM tb_produtos p, tb_vendas v, tb_itens i
+  WHERE  p.pro_codigo = i.tb_produtos_pro_codigo
+    AND i.tb_vendas_ven_codigo = v.ven_codigo
+    AND v.ven_codigo = '006'
+);
+
+-- Recuperar os clientes que realizaram compras com valor acima
+-- de 100,00 ou que foram realizadas em 2022
+SELECT DISTINCT ven_cli_cpf
+FROM tb_vendas
+WHERE ven_codigo in (
+  SELECT ven_codigo
+  FROM tb_vendas 
+  WHERE ven_valor_total > '100')
+or ven_codigo in (
+  SELECT ven_codigo
+  FROM tb_vendas
+  WHERE ven_horario LIKE '%2022'
+)
+
+-- Funcionário que mais realizou vendas 
+SELECT fun_codigo
+FROM tb_funcionarios
+WHERE (
+  SELECT 
+  FROM tb_vendas
+  WHERE tb_funcionarios_fun_codigo
+);
+
+-- Obter o código, descrição e quantidade de
+-- produtos fornecidos pelos fornecedores
+SELECT forn.for_codigo, forn.for_descricao, COUNT(*)
+FROM tb_fornecedores forn, tb_produtos prod 
+WHERE forn.for_codigo = prod.tb_fornecedores_for_codigo
+GROUP BY forn.for_codigo, forn.for_descricao;
+
+-- A média dos valores das compras realizadas em 2022
+SELECT AVG(ven_valor_total)
+FROM tb_vendas
+WHERE ven_horario LIKE '%2022';
+
+-- Quais funcionários realizaram 2 vendas 
+SELECT f.fun_nome
+FROM tb_funcionarios f
+WHERE (
+      SELECT COUNT(*)
+      FROM tb_vendas v
+      WHERE v.tb_funcionarios_fun_codigo = f.fun_codigo) = 2;
+);
+      
+-- Vendas com valores maiores que 75 e menores que 150
+-- realizadas pelo funcionário de código 33
+SELECT ven_codigo
+FROM tb_vendas
+WHERE ven_valor_total BETWEEN 75 AND 150
+    AND tb_funcionarios_fun_codigo = '33';

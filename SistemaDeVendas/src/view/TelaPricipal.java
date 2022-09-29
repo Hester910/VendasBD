@@ -48,7 +48,7 @@ public class TelaPricipal extends javax.swing.JFrame {
                 jButtonFornecedorActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonFornecedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+        getContentPane().add(jButtonFornecedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, -1, -1));
 
         jButtonCategoria.setText("categoria");
         jButtonCategoria.addActionListener(new java.awt.event.ActionListener() {
@@ -56,7 +56,7 @@ public class TelaPricipal extends javax.swing.JFrame {
                 jButtonCategoriaActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+        getContentPane().add(jButtonCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, -1, -1));
 
         jButtonUsuario.setText("usuario");
         jButtonUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -64,7 +64,7 @@ public class TelaPricipal extends javax.swing.JFrame {
                 jButtonUsuarioActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
+        getContentPane().add(jButtonUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
 
         jButtonProduto.setText("produto");
         jButtonProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -72,9 +72,9 @@ public class TelaPricipal extends javax.swing.JFrame {
                 jButtonProdutoActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
+        getContentPane().add(jButtonProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, -1, -1));
 
-        setSize(new java.awt.Dimension(416, 308));
+        setSize(new java.awt.Dimension(318, 137));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

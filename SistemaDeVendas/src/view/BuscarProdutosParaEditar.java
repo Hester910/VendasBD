@@ -18,7 +18,7 @@ import model.Produto;
  *
  * @author anderson
  */
-public class BuscarProdutos extends javax.swing.JFrame {
+public class BuscarProdutosParaEditar extends javax.swing.JFrame {
 
     private ProdutoDAO produtoDao;
     private ArrayList<Produto> ListProduto;
@@ -28,7 +28,7 @@ public class BuscarProdutos extends javax.swing.JFrame {
     /**
      * Creates new form BuscarProdutos
      */
-    public BuscarProdutos() {
+    public BuscarProdutosParaEditar() {
         initComponents();
         produtoDao = new ProdutoDAO();
         ListProduto = new ArrayList<>();
@@ -88,8 +88,10 @@ public class BuscarProdutos extends javax.swing.JFrame {
                 produto.setDescricao(ListProduto.get(i).getDescricao());
                 produto.setQuantidade(ListProduto.get(i).getQuantidade());
                 produto.setValor(ListProduto.get(i).getValor());
-                controller.RecebeInformacoesProduto(produto);
-                //controller.RecebeInformacoesProduto2(produto);
+                produto.setCategoria(ListProduto.get(i).getCategoria());
+                produto.setFornecedor(ListProduto.get(i).getFornecedor());
+                //controller.RecebeInformacoesProduto(produto);
+                controller.RecebeInformacoesProduto2(produto);
             }
         }
         //ProdutoBeans produtoBeansInstancia = produtoDAO.procurarProdutoNome(nome_Produto);
@@ -145,21 +147,23 @@ public class BuscarProdutos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BuscarProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BuscarProdutosParaEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BuscarProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BuscarProdutosParaEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BuscarProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BuscarProdutosParaEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BuscarProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BuscarProdutosParaEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BuscarProdutos().setVisible(true);
+                new BuscarProdutosParaEditar().setVisible(true);
             }
         });
     }

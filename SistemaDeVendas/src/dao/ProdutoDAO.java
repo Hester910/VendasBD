@@ -112,11 +112,9 @@ public class ProdutoDAO {
                             produto.setDescricao(rs.getString("pro_descricao"));
                             produto.setQuantidade(rs.getInt("pro_quantidade"));
                             produto.setValor(rs.getDouble("pro_valor"));
-;				//System.out.println("CODIGO PRODUTO: " + rs.getInt("pro_codigo"));
-				//System.out.println("DESCRICAO PRODUTO: " + rs.getString("pro_descricao"));
-				//System.out.println("CODIGO FORNECEDOR: " + rs.getInt("tb_fornecedores_for_codigo"));
-				//System.out.println("\n");
-				retorno.add(produto);
+                            produto.setFornecedor(fornecedorDao.achar_fornecedor(rs.getInt("tb_fornecedores_for_codigo")));
+                            produto.setCategoria(categoriaDAO.achar_categoria(rs.getInt("tb_categoria_cat_codigo")));
+                            retorno.add(produto);
 			}
 			rs.close();
                         return retorno;
@@ -129,5 +127,24 @@ public class ProdutoDAO {
 
 	}
         
-
+        public void atualizar(Produto p){
+            String sql = "UPDATE tb_produtos set pro_descricao=?, pro_valor=?, pro_quantidade=?, tb_fornecedores_for_codigo=?, tb_categoria_cat_codigo=? WHERE pro_codigo=?";
+		
+		try {
+			con = BancoConnection.getConnection();
+			PreparedStatement stm = con.prepareStatement(sql);
+			stm.setString(1, p.getDescricao());
+			stm.setDouble(2, p.getValor());
+			stm.setInt(3, p.getQuantidade());
+			stm.setInt(4, p.getFornecedor().getCodigo());
+			stm.setInt(5, p.getCategoria().getCodigo());
+			stm.setInt(6, p.getCodigo());
+			stm.executeUpdate();
+			System.out.println("Produto Alterado\n");
+		}catch (SQLException e) {
+			System.out.println("Erro : " + e);
+		}finally {
+			BancoConnection.closeConnection(con);
+		}
+        }
 }

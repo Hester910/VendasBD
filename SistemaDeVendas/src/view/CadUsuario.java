@@ -37,6 +37,7 @@ public class CadUsuario extends javax.swing.JFrame {
         jTextFieldNome = new javax.swing.JTextField();
         jTextFieldSenha = new javax.swing.JTextField();
         jButtonSalvar = new javax.swing.JButton();
+        jButtonEditar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -48,16 +49,16 @@ public class CadUsuario extends javax.swing.JFrame {
         getContentPane().add(Nome1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, -1));
 
         Nome2.setText("Senha");
-        getContentPane().add(Nome2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
+        getContentPane().add(Nome2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
 
         jTextFieldcpf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldcpfActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextFieldcpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 180, -1));
+        getContentPane().add(jTextFieldcpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 180, -1));
         getContentPane().add(jTextFieldNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 180, -1));
-        getContentPane().add(jTextFieldSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 180, -1));
+        getContentPane().add(jTextFieldSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 180, -1));
 
         jButtonSalvar.setText("Salvar");
         jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -66,6 +67,9 @@ public class CadUsuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButtonSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, -1, -1));
+
+        jButtonEditar.setText("Editar");
+        getContentPane().add(jButtonEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 80, -1, -1));
 
         setSize(new java.awt.Dimension(416, 308));
         setLocationRelativeTo(null);
@@ -128,6 +132,7 @@ public class CadUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel Nome;
     private javax.swing.JLabel Nome1;
     private javax.swing.JLabel Nome2;
+    private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JTextField jTextFieldSenha;

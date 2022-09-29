@@ -4,10 +4,12 @@
  */
 package view;
 
+import ControlerGeral.Controller;
 import dao.CategoriaDAO;
 import dao.FornecedorDAO;
 import dao.ProdutoDAO;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import model.Categoria;
 import model.Fornecedor;
 import model.Produto;
@@ -24,6 +26,8 @@ public class CadProduto extends javax.swing.JFrame {
     Produto produto;
     ArrayList<Categoria> listCategoria = new ArrayList<>();
     ArrayList<Fornecedor> listFornecedor = new ArrayList<>();
+    private Controller controller;
+    boolean editando;
     /**
      * Creates new form CadProduto
      */
@@ -31,8 +35,26 @@ public class CadProduto extends javax.swing.JFrame {
         initComponents();
         categoriaDAO = new CategoriaDAO();
         fornecedorDAO = new FornecedorDAO();
+        controller = new Controller();
         PreencherComboBox();
+        editando = false;
+        jTextFieldCodigo.setText("");
+        jTextFieldDescricao.setText("");
+        jTextFieldValor.setText("");
+        jTextFieldQuantidadeEmEstoque.setText("");
     }
+    
+    public void receberProduto(Produto produtoBeans){ 
+        jTextFieldCodigo.setText(Integer.toString(produtoBeans.getCodigo()));
+        jTextFieldDescricao.setText(produtoBeans.getDescricao());
+        jComboBoxCategoria.removeAllItems();
+        jComboBoxCategoria.addItem(produtoBeans.getCategoria().getNome());
+        jTextFieldValor.setText(Double.toString(produtoBeans.getValor()));
+        jTextFieldQuantidadeEmEstoque.setText(Integer.toString(1));
+        jComboBoxFornecedor.removeAllItems();
+        jComboBoxFornecedor.addItem(produtoBeans.getFornecedor().getDescricao());
+    }
+    
     public void PreencherComboBox(){        
         listCategoria = categoriaDAO.mostrarCategorias();
         listFornecedor = fornecedorDAO.mostrarFornecedor();
@@ -58,6 +80,10 @@ public class CadProduto extends javax.swing.JFrame {
         jComboBoxCategoria = new javax.swing.JComboBox<>();
         jComboBoxFornecedor = new javax.swing.JComboBox<>();
         jButtonSalvar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jTextFieldCodigo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -84,6 +110,11 @@ public class CadProduto extends javax.swing.JFrame {
                 jComboBoxCategoriaPopupMenuWillBecomeVisible(evt);
             }
         });
+        jComboBoxCategoria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBoxCategoriaMouseClicked(evt);
+            }
+        });
         jComboBoxCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxCategoriaActionPerformed(evt);
@@ -91,6 +122,11 @@ public class CadProduto extends javax.swing.JFrame {
         });
         getContentPane().add(jComboBoxCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, 150, -1));
 
+        jComboBoxFornecedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBoxFornecedorMouseClicked(evt);
+            }
+        });
         getContentPane().add(jComboBoxFornecedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 80, 150, -1));
 
         jButtonSalvar.setText("Salvar");
@@ -101,7 +137,25 @@ public class CadProduto extends javax.swing.JFrame {
         });
         getContentPane().add(jButtonSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 130, -1, -1));
 
-        setSize(new java.awt.Dimension(416, 308));
+        jLabel4.setText("Categoria");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, 90, -1));
+
+        jLabel5.setText("Fornecedor");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, 100, -1));
+
+        jButton1.setText("Editar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, -1, -1));
+
+        jTextFieldCodigo.setEditable(false);
+        jTextFieldCodigo.setEnabled(false);
+        getContentPane().add(jTextFieldCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 30, 30));
+
+        setSize(new java.awt.Dimension(403, 236));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -126,9 +180,60 @@ public class CadProduto extends javax.swing.JFrame {
                 fornecedor = f;
             }
         }
-        produto = new Produto(jTextFieldDescricao.getText(),Double.parseDouble( jTextFieldValor.getText()), Integer.parseInt(jTextFieldQuantidadeEmEstoque.getText()),fornecedor, categoria);
-        produtoDAO.inserirProduto(produto);
+        if(editando){
+            try{
+                produto = new Produto(Integer.parseInt(jTextFieldCodigo.getText()),jTextFieldDescricao.getText(),Double.parseDouble( jTextFieldValor.getText()), Integer.parseInt(jTextFieldQuantidadeEmEstoque.getText()),fornecedor, categoria);
+                produtoDAO.atualizar(produto);
+                jTextFieldCodigo.setText("");
+                jTextFieldDescricao.setText("");
+                jTextFieldValor.setText("");
+                jTextFieldQuantidadeEmEstoque.setText("");
+                JOptionPane.showMessageDialog(null, "Produto alterado");
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Não foi possivel alterar o produto");
+            }
+        }else{
+            try{
+                produto = new Produto(jTextFieldDescricao.getText(),Double.parseDouble( jTextFieldValor.getText()), Integer.parseInt(jTextFieldQuantidadeEmEstoque.getText()),fornecedor, categoria);
+                produtoDAO.inserirProduto(produto);
+                jTextFieldCodigo.setText("");
+                jTextFieldDescricao.setText("");
+                jTextFieldValor.setText("");
+                jTextFieldQuantidadeEmEstoque.setText("");
+                JOptionPane.showMessageDialog(null, "Produto salvo");
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Não foi possivel salvar o produto");
+            }
+            
+        }
+        editando = false;
+        
     }//GEN-LAST:event_jButtonSalvarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        editando = true;
+        controller.abreBuscarProdutosParaEditar();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBoxCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxCategoriaMouseClicked
+        if(editando){
+            listCategoria = categoriaDAO.mostrarCategorias();
+            jComboBoxCategoria.removeAllItems();
+            for(Categoria c : listCategoria){
+                jComboBoxCategoria.addItem(c.getNome());
+            }
+        }
+    }//GEN-LAST:event_jComboBoxCategoriaMouseClicked
+
+    private void jComboBoxFornecedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxFornecedorMouseClicked
+        if(editando){
+            listFornecedor = fornecedorDAO.mostrarFornecedor();
+            jComboBoxFornecedor.removeAllItems();
+            for(Fornecedor f : listFornecedor){
+                jComboBoxFornecedor.addItem(f.getDescricao());
+            }
+        }
+    }//GEN-LAST:event_jComboBoxFornecedorMouseClicked
 
     /**
      * @param args the command line arguments
@@ -166,12 +271,16 @@ public class CadProduto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JComboBox<String> jComboBoxCategoria;
     private javax.swing.JComboBox<String> jComboBoxFornecedor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JTextField jTextFieldCodigo;
     private javax.swing.JTextField jTextFieldDescricao;
     private javax.swing.JTextField jTextFieldQuantidadeEmEstoque;
     private javax.swing.JTextField jTextFieldValor;

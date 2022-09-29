@@ -293,10 +293,14 @@ public class PDV extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldCodigoKeyPressed
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        controller.abreFormaPagamento();
-        controller.enviarInformacoesDoPdv(jLabelValorTotal.getText());
+        if(jLabelCpfCnpj.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Adicione um cliente");
+        }else{
+            controller.abreFormaPagamento();
+            controller.enviarInformacoesDoPdv(jLabelValorTotal.getText());
+        }    
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
-
+    
     private void jTextFieldQuantidadeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldQuantidadeKeyPressed
         if(evt.getKeyCode() == 10){
             if(jTextFieldCodigo.getText().isEmpty() || jTextFieldQuantidade.getText().isEmpty() || jTextFieldValorUnitario .getText().isEmpty()){
@@ -315,6 +319,7 @@ public class PDV extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldQuantidadeKeyPressed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        
         controller.abreBuscarPessoas();
     }//GEN-LAST:event_jLabel2MouseClicked
     
